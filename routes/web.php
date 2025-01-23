@@ -24,11 +24,17 @@ Route::middleware('auth')->group(function () {
 });
 
 
-Route::prefix('pages')->group(function () {
-    Route::get('/about', [AboutController::class, 'index'])->name('about');
-    Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery');
-    Route::get('/contact', [ContactController::class, 'index'])->name('contact');
-    Route::get('/testimonial', [TestimonialController::class, 'index'])->name('testimonial');
+$pages = [
+    'about' => AboutController::class,
+    'gallery' => GalleryController::class,
+    'contact' => ContactController::class,
+    'testimonial' => TestimonialController::class,
+];
+
+Route::prefix('pages')->group(function () use ($pages) {
+    foreach ($pages as $uri => $controller) {
+        Route::get("/{$uri}", [$controller, 'index'])->name($uri);
+    }
 });
 
 
