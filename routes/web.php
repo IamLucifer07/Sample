@@ -34,6 +34,11 @@ $pages = [
 Route::prefix('pages')->group(function () use ($pages) {
     foreach ($pages as $uri => $controller) {
         Route::get("/{$uri}", [$controller, 'index'])->name($uri);
+
+        // Add a POST route specifically for the "about" page
+        if ($uri === 'about') {
+            Route::post("/{$uri}", [$controller, 'store'])->name("{$uri}.store");
+        }
     }
 });
 

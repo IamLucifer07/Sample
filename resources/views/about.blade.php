@@ -10,57 +10,39 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <p class="text-lg font-medium mb-6">You're in the About Section!</p>
+                    @if(session('success'))
+                        <div id="successMessage" class="bg-green-500 text-black p-4 rounded-lg mb-4">
+                            {{ session('success') }}
+                        </div>
+                    @endif
 
                     <form action="{{ route('about.store') }}" method="POST" enctype="multipart/form-data"
-                        class="space-y-6">
-                        @csrf <!-- Laravel's CSRF token -->
+                        class="mt-6 space-y-6">
+                        @csrf
+                        <x-input-label for="title" :value="__('Title')" />
+                        <x-text-input id="title" name="title" type="text" class="mt-1 block w-full" required autofocus
+                            autocomplete="title" />
+                        <x-input-error class="mt-2" :messages="$errors->get('title')" />
 
-                        <!-- Title -->
-                        <div>
-                            <x-input-label for="title" :value="__('Title')" />
-                            <x-text-input id="title" name="title" type="text"
-                                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-                                required autofocus autocomplete="title" />
-                            <x-input-error class="mt-2" :messages="$errors->get('title')" />
-                        </div>
+                        <x-input-label for="content" :value="__('Content')" />
+                        <textarea id="content" name="content" class="mt-1 block w-full"></textarea>
+                        <x-input-error class="mt-2" :messages="$errors->get('content')" />
 
-                        <!-- Content -->
-                        <div>
-                            <x-input-label for="content" :value="__('Content')" />
-                            <textarea id="content" name="content" rows="4"
-                                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-                                required></textarea>
-                            <x-input-error class="mt-2" :messages="$errors->get('content')" />
-                        </div>
+                        <x-input-label for="image1" :value="__('Image 1')" />
+                        <input id="image1" name="image1" type="file" class="block mt-1 w-full" />
+                        <x-input-error class="mt-2" :messages="$errors->get('image1')" />
 
-                        <!-- Image 1 -->
-                        <div>
-                            <x-input-label for="image1" :value="__('Image 1 (Max: 1MB)')" />
-                            <input id="image1" name="image1" type="file" accept="image/*"
-                                class="mt-1 block w-full text-sm text-gray-500 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500" />
-                            <x-input-error class="mt-2" :messages="$errors->get('image1')" />
-                        </div>
+                        <x-input-label for="image2" :value="__('Image 2')" />
+                        <input id="image2" name="image2" type="file" class="block mt-1 w-full" />
+                        <x-input-error class="mt-2" :messages="$errors->get('image2')" />
 
-                        <!-- Image 2 -->
-                        <div>
-                            <x-input-label for="image2" :value="__('Image 2 (Max: 1MB)')" />
-                            <input id="image2" name="image2" type="file" accept="image/*"
-                                class="mt-1 block w-full text-sm text-gray-500 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500" />
-                            <x-input-error class="mt-2" :messages="$errors->get('image2')" />
-                        </div>
+                        <x-input-label for="video" :value="__('Video')" />
+                        <input id="video" name="video" type="file" class="block mt-1 w-full" />
+                        <x-input-error class="mt-2" :messages="$errors->get('video')" />
 
-                        <!-- Video -->
-                        <div>
-                            <x-input-label for="video" :value="__('Video (Max: 10MB)')" />
-                            <input id="video" name="video" type="file" accept="video/*"
-                                class="mt-1 block w-full text-sm text-gray-500 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500" />
-                            <x-input-error class="mt-2" :messages="$errors->get('video')" />
-                        </div>
-
-                        <!-- Submit Button -->
                         <div>
                             <button type="submit"
-                                class="bg-indigo-600 text-white py-2 px-4 rounded-lg shadow hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                                class="bg-indigo-600 text-black py-2 px-4 rounded-lg shadow hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                                 Submit
                             </button>
                         </div>
@@ -69,4 +51,20 @@
             </div>
         </div>
     </div>
+    @if($errors->has('error'))
+        <div class="bg-red-500 text-white p-4 rounded-lg mb-4">
+            {{ $errors->first('error') }}
+        </div>
+    @endif
 </x-app-layout>
+
+{{--success message --}}
+<script>
+
+    setTimeout(function () {
+        const successMessage = document.getElementById('successMessage');
+        if (successMessage) {
+            successMessage.style.display = 'none';
+        }
+    }, 5000);
+</script>
