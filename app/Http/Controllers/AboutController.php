@@ -16,21 +16,25 @@ class AboutController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'content' => 'required|string',
-            'image1' => 'nullable|image|max:1024', // 1MB limit for images
-            'image2' => 'nullable|image|max:1024',
-            'video' => 'nullable|mimes:mp4,avi,webm|max:20480', // 20MB limit for videos
+            'media_type' => 'required|in:images,videos',
+            'images.*' => 'nullable|image|max:1024', // Each image has a 1MB limit
+            'videos' => 'nullable|mimes:mp4,avi,webm|max:20480', // Video has a 20MB limit
         ]);
 
-        // Process uploaded files
-        if ($request->hasFile('image1')) {
-            $validated['image1'] = $request->file('image1')->store('images', 'public');
+        // Process media files based on the selected media type
+        if ($request->media_type === 'images' && $request->hasFile('images')) {
+            $imagePaths = [];
+            foreach ($request->file('images') as $image) {
+                $imagePaths[] = $image->store('images', 'public'); // Store images in the 'public/images' directory
+            }
+            $validated['images'] = $imagePaths;
         }
-        if ($request->hasFile('image2')) {
-            $validated['image2'] = $request->file('image2')->store('images', 'public');
+
+        if ($request->media_type === 'videos' && $request->hasFile('videos')) {
+            $validated['video'] = $request->file('videos')->store('videos', 'public'); // Store video in the 'public/videos' directory
         }
-        if ($request->hasFile('video')) {
-            $validated['video'] = $request->file('video')->store('videos', 'public');
-        }
+
+        // Optionally save the data to a database or perform other actions
 
         return redirect()->route('about')->with('success', 'Data submitted successfully!');
     }
