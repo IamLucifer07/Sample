@@ -21,20 +21,10 @@ class AboutController extends Controller
             'videos' => 'nullable|mimes:mp4,avi,webm|max:20480', // Video has a 20MB limit
         ]);
 
-        // Process media files based on the selected media type
-        if ($request->media_type === 'images' && $request->hasFile('images')) {
-            $imagePaths = [];
-            foreach ($request->file('images') as $image) {
-                $imagePaths[] = $image->store('images', 'public'); // Store images in the 'public/images' directory
-            }
-            $validated['images'] = $imagePaths;
-        }
-
-        if ($request->media_type === 'videos' && $request->hasFile('videos')) {
-            $validated['video'] = $request->file('videos')->store('videos', 'public'); // Store video in the 'public/videos' directory
-        }
-
-        // Optionally save the data to a database or perform other actions
+        $validated[($request->media_type === 'images' && $request->hasFile('images')) ? 'images' : 'video'] =
+            $request->media_type === 'images'
+            ? array_map(fn($image) => $image->store('images', 'public'), $request->file('images'))
+            : ($request->media_type === 'videos' ? $request->file('videos')->store('videos', 'public') : null);
 
         return redirect()->route('about')->with('success', 'Data submitted successfully!');
     }
