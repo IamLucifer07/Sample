@@ -26,8 +26,8 @@ class AboutController extends Controller
             ? array_map(fn($image) => $image->store('images', 'public'), $request->file('images'))
             : ($request->media_type === 'videos' ? $request->file('videos')->store('videos', 'public') : null);
 
+        // laravel is crazyyy :D
 
-
-        return redirect()->route('about')->with('success', 'Data submitted successfully!');
+        // return redirect()->route('about')->with('success', 'Data submitted successfully!');
     }
 }
