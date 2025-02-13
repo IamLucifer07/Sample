@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\AboutSection;
 
 class AboutController extends Controller
 {
@@ -21,11 +22,20 @@ class AboutController extends Controller
             'videos' => 'nullable|mimes:mp4,avi,webm|max:20480',
         ]);
 
-        $validated[($request->media_type === 'images' && $request->hasFile('images')) ? 'images' : 'video'] =
-            $request->media_type === 'images'
-            ? array_map(fn($image) => $image->store('images', 'public'), $request->file('images'))
-            : ($request->media_type === 'videos' ? $request->file('videos')->store('videos', 'public') : null);
+        $mediaPaths = [];
 
+        if ($request->media_type === 'images' && $request->hasFile('images')) {
+            $mediaPaths = array_map(fn($image) => $image->store('images', 'public'), $request->file('images'));
+        } elseif ($request->media_type === 'videos' && $request->hasFile('videos')) {
+            $mediaPaths = $request->file('videos')->store('videos', 'public');
+        }
+
+        AboutSection::create([
+            'title' => $validated['title'],
+            'content' => $validated['content'],
+            'media_type' => $validated['media_type'],
+            'media_paths' => $mediaPaths,
+        ]);
 
         return redirect()->route('about')->with('success', 'Data submitted successfully!');
     }
