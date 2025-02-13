@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Abouts;
+use App\Models\Abouts as About;
 
 class AboutController extends Controller
 {
     public function index()
     {
-        return view('about');
+        $abouts = About::latest()->get();
+        return view('about', compact('abouts'));
     }
 
     public function store(Request $request)
