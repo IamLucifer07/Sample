@@ -7,9 +7,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\TestimonialController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+
 
 Route::get('/', function () {
     return view('dashboard');
@@ -41,7 +39,8 @@ Route::prefix('pages')->group(function () use ($pages) {
         }
     }
 });
-
+Route::get('/about', [AboutController::class, 'index'])->name('about');
+Route::post('/about/store', [AboutController::class, 'store'])->name('about.store');
 
 Route::middleware('auth')->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');

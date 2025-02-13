@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\AboutSection;
+use App\Models\Abouts;
 
 class AboutController extends Controller
 {
@@ -30,7 +30,7 @@ class AboutController extends Controller
             $mediaPaths = $request->file('videos')->store('videos', 'public');
         }
 
-        AboutSection::create([
+        Abouts::create([
             'title' => $validated['title'],
             'content' => $validated['content'],
             'media_type' => $validated['media_type'],

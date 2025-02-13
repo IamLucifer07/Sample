@@ -58,6 +58,26 @@
         </div>
     </div>
 
+    {{-- @foreach($abouts as $about)
+    <div class="p-4 border rounded mb-4">
+        <h3 class="text-lg font-bold">{{ $about->title }}</h3>
+        <p>{{ $about->content }}</p>
+
+        @if($about->media_type === 'images' && !empty($about->media))
+        <div class="flex gap-2 mt-2">
+            @foreach($about->media as $image)
+            <img src="{{ asset('storage/' . $image) }}" class="w-32 h-32 object-cover rounded">
+            @endforeach
+        </div>
+        @elseif($about->media_type === 'videos' && !empty($about->media))
+        <video width="320" height="240" controls class="mt-2">
+            <source src="{{ asset('storage/' . $about->media[0]) }}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        @endif
+    </div>
+    @endforeach --}}
+
     <script>
         function toggleMediaInput() {
             const mediaType = document.getElementById('media_type').value;
