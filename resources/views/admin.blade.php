@@ -10,7 +10,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     @if(session('success'))
-                        <div id="successMessage" class="bg-green-500 text-black p-4 rounded-lg mb-4">
+                        <div id="successMessage" class="bg-green-500 text-white p-4 rounded-lg mb-4">
                             {{ session('success') }}
                         </div>
                     @endif
@@ -34,7 +34,7 @@
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit"
-                                                    class="bg-red-500 text-red-600 px-4 py-2 rounded-lg">Delete</button>
+                                                    class="bg-red-500 text-white px-4 py-2 rounded-lg">Delete</button>
                                             </form>
                                         @else
                                             <span>Cannot delete yourself</span>
