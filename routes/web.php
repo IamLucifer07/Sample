@@ -32,15 +32,11 @@ $pages = [
 Route::prefix('pages')->group(function () use ($pages) {
     foreach ($pages as $uri => $controller) {
         Route::get("/{$uri}", [$controller, 'index'])->name($uri);
-
-        // Add a POST route specifically for the "about" page
         if ($uri === 'about') {
             Route::post("/{$uri}", [$controller, 'store'])->name("{$uri}.store");
         }
     }
 });
-Route::get('/about', [AboutController::class, 'index'])->name('about');
-Route::post('/about/store', [AboutController::class, 'store'])->name('about.store');
 
 Route::middleware('auth')->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
