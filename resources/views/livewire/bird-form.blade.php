@@ -1,13 +1,13 @@
 <div>
     <form wire:submit="submit">
         <div>
-            <label for="count">Bird Count: </label>
-            <input wire:model="count" type="number" />
+            <x-input-label for="count" :value="('Bird Count')" />
+            <x-text-input wire:model="count" type="number" />
         </div>
         <div>
-            <label for="notes">Notes: </label>
-            <textarea wire:model="notes"></textarea>
+            <x-input-label for="notes" :value="('Notes')" />
+            <textarea wire:model="notes" class="mt-1 block mb-4"></textarea>
         </div>
-        <button class="border">Add a New Bird Count Entry</button>
+        <x-primary-button>Add Bird Count Entry</x-primary-button>
     </form>
 </div>
