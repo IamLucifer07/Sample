@@ -8,6 +8,6 @@
             <x-input-label for="notes" :value="('Notes')" />
             <textarea wire:model="notes" class="mt-1 block mb-4"></textarea>
         </div>
-        <x-primary-button>Add Bird Count Entry</x-primary-button>
+        <x-primary-button>Add Bird Count</x-primary-button>
     </form>
 </div>
