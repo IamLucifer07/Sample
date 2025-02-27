@@ -6,7 +6,7 @@
         </div>
         <div>
             <x-input-label for="notes" :value="('Notes')" />
-            <textarea wire:model="notes" class="mt-1 block mb-4"></textarea>
+
         </div>
         <x-primary-button wire:click="delete"
             wire:confirm="Are you sure you want to delete this?">Delete</x-primary-button>
