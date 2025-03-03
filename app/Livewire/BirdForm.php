@@ -14,10 +14,7 @@ class BirdForm extends Component
     public function submit()
     {
 
-        $this->validate([
-            'count' => 'required|integer|min:1',
-            'notes' => 'nullable|string',
-        ]);
+
 
         Entry::create([
             'bird_count' => $this->count,
