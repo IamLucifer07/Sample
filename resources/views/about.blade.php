@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('About') }}
+            {{ __('messages.About') }}
         </h2>
     </x-slot>
 
@@ -31,9 +31,9 @@
                         <x-input-label for="media_type" :value="__('Media Type')" />
                         <select id="media_type" name="media_type" class="mt-1 block w-full"
                             onchange="toggleMediaInput()">
-                            <option value="">{{ __('Select Media Type') }}</option>
-                            <option value="images">{{ __('Images') }}</option>
-                            <option value="videos">{{ __('Videos') }}</option>
+                            <option value="">{{ __('messages.Select Media Type') }}</option>
+                            <option value="images">{{ __('messages.Images') }}</option>
+                            <option value="videos">{{ __('messages.Videos') }}</option>
                         </select>
                         <x-input-error class="mt-2" :messages="$errors->get('media_type')" />
 
@@ -50,7 +50,7 @@
                         </div>
 
                         <x-primary-button class="mt-4">
-                            {{ __('Submit') }}
+                            {{ __('messages.Submit') }}
                         </x-primary-button>
                     </form>
                 </div>
