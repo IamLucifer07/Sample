@@ -26,8 +26,8 @@ class BirdForm extends Component
 
         return redirect()->to('/');
     }
-    // public function render()
-    // {
-    //     return view('livewire.bird-form');
-    // }
+    public function render()
+    {
+        return view('livewire.bird-form');
+    }
 }
