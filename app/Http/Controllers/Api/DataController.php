@@ -19,8 +19,8 @@ class DataController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'Name' => 'string',
-            'Description' => 'string',
+            'name' => 'string',
+            'description' => 'string',
         ]);
 
         $data = Data::create($validatedData);

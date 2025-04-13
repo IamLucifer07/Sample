@@ -42,6 +42,5 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
     Route::delete('/admin/{id}', [AdminController::class, 'destroy'])->name('admin.destroy');
 });
-require base_path('routes/api.php');
 
 require __DIR__ . '/auth.php';
