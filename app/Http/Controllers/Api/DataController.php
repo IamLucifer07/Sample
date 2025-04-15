@@ -16,7 +16,16 @@ class DataController extends Controller
     }
 
     // Create a new data
+    public function store(Request $request)
+    {
+        $validatedData = $request->validate([
+            'name' => 'string',
+            'description' => 'string',
+        ]);
 
+        $data = Data::create($validatedData);
+        return response()->json($data, 201);
+    }
 
     // Fetch a single data
     public function show($id)
