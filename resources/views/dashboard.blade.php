@@ -49,8 +49,9 @@
                             <td class="px-6 py-4 whitespace-nowrap">{{ $entry->id }}</td>
                             <td class="px-6 py-4 whitespace-nowrap">{{ $entry->notes }}</td>
                             <td class="px-6 py-4 whitespace-nowrap">{{ $entry->bird_count }}</td>
-                            {{-- <td class="px-6 py-4 whitespace-nowrap">{{ $entry->created_at->format('Y-m-d H:i') }}</td>
-                            --}}
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                {{ \Carbon\Carbon::parse($entry->created_at)->format('Y-m-d H:i') }}</td>
+
                         </tr>
                     @endforeach
                 </tbody>
