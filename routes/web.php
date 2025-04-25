@@ -7,12 +7,11 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\TestimonialController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\DashboardController;
 
 
-Route::get('/', function () {
-    return view('dashboard');
-})
-    // ->middleware(['auth', 'verified'])
+Route::get('/', [DashboardController::class, 'index'])
+    // ->middleware(['auth'])
     ->name('dashboard');
 
 Route::middleware('auth')->group(function () {
