@@ -43,7 +43,19 @@
                             Created At</th>
                     </tr>
                 </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                    @foreach ($entries as $entry)
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap">{{ $entry->id }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap">{{ $entry->notes }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap">{{ $entry->bird_count }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                {{ \Carbon\Carbon::parse($entry->created_at)->format('Y-m-d H:i') }}
+                            </td>
 
+                        </tr>
+                    @endforeach
+                </tbody>
             </table>
         </div>
     </div>
