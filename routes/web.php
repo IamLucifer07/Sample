@@ -37,6 +37,9 @@ Route::prefix('pages')->group(function () use ($pages) {
     }
 });
 
-
+Route::middleware('auth')->group(function () {
+    Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+    Route::delete('/admin/{id}', [AdminController::class, 'destroy'])->name('admin.destroy');
+});
 
 require __DIR__ . '/auth.php';
