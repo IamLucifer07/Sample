@@ -21,12 +21,7 @@ Route::middleware('auth')->group(function () {
 });
 
 
-$pages = [
-    'about' => AboutController::class,
-    'gallery' => GalleryController::class,
-    'contact' => ContactController::class,
-    'testimonial' => TestimonialController::class,
-];
+
 
 Route::prefix('pages')->group(function () use ($pages) {
     foreach ($pages as $uri => $controller) {
