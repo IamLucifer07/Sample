@@ -28,14 +28,7 @@ $pages = [
     'testimonial' => TestimonialController::class,
 ];
 
-Route::prefix('pages')->group(function () use ($pages) {
-    foreach ($pages as $uri => $controller) {
-        Route::get("/{$uri}", [$controller, 'index'])->name($uri);
-        if ($uri === 'about') {
-            Route::post("/{$uri}", [$controller, 'store'])->name("{$uri}.store");
-        }
-    }
-});
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
