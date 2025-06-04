@@ -42,4 +42,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/admin/{id}', [AdminController::class, 'destroy'])->name('admin.destroy');
 });
 
+
+Route::get('/bird/{id}/edit', [BirdController::class, 'edit'])->name('bird.edit');
+Route::put('/bird/{id}', [BirdController::class, 'update'])->name('bird.update');
+Route::delete('/bird/{id}', [BirdController::class, 'destroy'])->name('bird.destroy');
+
 require __DIR__ . '/auth.php';
