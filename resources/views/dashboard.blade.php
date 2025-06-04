@@ -41,6 +41,8 @@
                             Bird Count</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                             Created At</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Action</th>
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
@@ -51,6 +53,17 @@
                             <td class="px-6 py-4 whitespace-nowrap">{{ $entry->bird_count }}</td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 {{ \Carbon\Carbon::parse($entry->created_at)->format('Y-m-d H:i') }}
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <a href="{{ route('bird.edit', $entry->id) }}"
+                                    class="text-indigo-600 hover:underline">Update</a>
+                                |
+                                <form action="{{ route('bird.destroy', $entry->id) }}" method="POST" class="inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="text-red-600 hover:underline"
+                                        onclick="return confirm('Are you sure?')">Delete</button>
+                                </form>
                             </td>
 
                         </tr>
