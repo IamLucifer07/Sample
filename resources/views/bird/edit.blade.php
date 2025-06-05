@@ -1,4 +1,4 @@
-<x-layouts.app :title="__('Edit Bird Entry')">
+<<x-app-layout :title="__('Edit Bird Entry')">
     <div class="max-w-2xl mx-auto mt-10 bg-white p-6 rounded shadow">
         <h2 class="text-2xl font-bold mb-6">Edit Bird Entry</h2>
 
@@ -43,4 +43,4 @@
             </div>
         </form>
     </div>
-</x-layouts.app>
+    </x-app-layout>
