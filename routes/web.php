@@ -8,6 +8,8 @@ use App\Http\Controllers\TestimonialController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\BirdController;
+
 
 
 Route::get('/', [DashboardController::class, 'index'])
